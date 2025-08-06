@@ -7,5 +7,5 @@
 ### Palavra chave:
 * Aula01:
     * Pandas
-*Aula02:
+* Aula02:
     * Print
