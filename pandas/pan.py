@@ -73,5 +73,16 @@ df["remoto"] = df["remoto"].replace(renomear_remoto)
 
 # print(df["contrato"].value_counts()) # -- metodo vai contar os valores de cada categoria
 
-print(df.describe(include="object")) # --- count = numero de linhas || unique = valores unicos de cada tabela || top = valor que mais se repete || freq = frequencia que aquele valor se repete
-print(df.describe())
+# print(df.describe(include="object")) # --- count = numero de linhas || unique = valores unicos de cada tabela || top = valor que mais se repete || freq = frequencia que aquele valor se repete
+# print(df.describe())
+
+#print(df.isnull().sum()) # --- verificar se algum campo do data frame esta nulo
+#print(df['ano'].unique())
+# print(df[df.isnull().any(axis=1)]) # --- O resultado é uma Série (uma coluna) de valores booleanos que indica quais linhas do DataFrame original continham pelo menos um valor nulo.
+
+
+df_limpo = df.dropna() # função "dropna()" ira remover todas as linhas com valores nulos do data frame, para isso nos criamos uma copia do df principal
+# print(df_limpo.isnull().sum())
+
+df_limpo = df_limpo.assign(ano = df_limpo['ano'].astype('int64'))
+print(df_limpo.info())
