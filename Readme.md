@@ -9,3 +9,5 @@
     * Pandas
 * Aula02:
     * Print
+* Aula3:
+    * Matplotlib

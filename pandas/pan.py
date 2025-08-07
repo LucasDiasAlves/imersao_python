@@ -1,4 +1,10 @@
 import pandas as pd
+import matplotlib.pyplot as plt
+import plotly.express as px
+import seaborn as sns
+
+import plotly.io as pio
+pio.renderers.default = 'browser'
 
 # url para carregar a tabela csv e atribuindo p valor da url a variavel df(data frame) 
 url = "https://raw.githubusercontent.com/guilhermeonrails/data-jobs/refs/heads/main/salaries.csv"
@@ -85,4 +91,63 @@ df_limpo = df.dropna() # função "dropna()" ira remover todas as linhas com val
 # print(df_limpo.isnull().sum())
 
 df_limpo = df_limpo.assign(ano = df_limpo['ano'].astype('int64'))
-print(df_limpo.info())
+
+# print(df_limpo['senioridade'].value_counts().plot(kind='bar', title="distribuição de senioridade"))
+
+# sns.barplot(data=df_limpo, x='senioridade', y='usd')
+
+# plt.figure(figsize=(8,5))
+# sns.barplot(data=df_limpo, x='senioridade', y='usd')
+# plt.title("Salario medio por nivel de senioridade")
+# plt.xlabel("Nível de senioridade")
+# plt.ylabel("Salario medio anual em USD $")
+
+# ordem = df_limpo.groupby('senioridade')['usd'].mean().sort_values(ascending=False).index
+# print(ordem)
+
+
+# plt.figure(figsize=(8,5))
+# sns.barplot(data=df_limpo, x='senioridade', y='usd', order=ordem)
+# plt.title("Salario medio por nivel de senioridade")
+# plt.xlabel("Nível de senioridade")
+# plt.ylabel("Salario medio anual em USD $")
+
+# plt.figure(figsize=(8,4))
+# sns.histplot(df_limpo['usd'], bins =100, kde=True)
+# plt.title("distribuição dos salarios anuais")
+# plt.xlabel("saalrio em usd")
+# plt.ylabel("frequencia")
+
+# plt.figure(figsize=(8,5))
+# sns.boxplot(x=df_limpo['usd'])
+# plt.title("boxplot salario")
+# plt.xlabel("salario em usd")
+
+# ordem_senioridade = ['Junior', 'Pleno', 'Senior', 'Executivo']
+# plt.figure(figsize=(8,5))
+# sns.boxplot(x='senioridade', y='usd', data=df_limpo, order=ordem_senioridade, palette='Set2', hue='senioridade')
+# plt.title("distribuição salarial por senioridade")
+# plt.xlabel("Nível de Senioridade") # O eixo X é a senioridade
+# plt.ylabel("Salário em USD")      # O eixo Y é o salário
+
+# plt.show()
+
+senioridade_media_salario = df_limpo.groupby('senioridade')['usd'].mean().sort_values(ascending=False).reset_index()
+
+fig = px.bar(senioridade_media_salario,
+             x='senioridade',
+             y='usd',
+             title='média salarial por senioridade',
+             labels={'senioridade': 'nível de senioridade', 'usd': 'média salarial anual (usd)'})
+
+# remoto_contagem = df_limpo['remoto'].value_counts().reset_index()
+# remoto_contagem.columns = ['tipo_trabalho', 'quantidade']
+
+# fig = px.pie(remoto_contagem,
+# 	names='tipo_trabalho', 
+# 	values='quantidade',
+# 	title='proporção dos tipos de trabalho',
+#     hole=0.5
+# 	)
+
+fig.show()
