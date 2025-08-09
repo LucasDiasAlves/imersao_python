@@ -12,9 +12,9 @@ df = pd.read_csv(url)
 
 # print(df.info()) -- para mostrar informações de tipos de gerais da tabela
 
-# print(df.describe())-- para descrever melhor sobre a tabela, traz estatisticas descritivas, apenas variaveis numericas
+# print(df.describe())  #-- para descrever melhor sobre a tabela, traz estatisticas descritivas, apenas variaveis numericas
 
-# print(df.shape) -- traz a dimenção do arquivo, (linhas, colunas)
+print(df.shape) #-- traz a dimenção do arquivo, (linhas, colunas)
 
 linhas, colunas = df.shape[0], df.shape[1]  #-- criando 2 variaveis para armazenar as linhas e as colunas
 
@@ -132,13 +132,13 @@ df_limpo = df_limpo.assign(ano = df_limpo['ano'].astype('int64'))
 
 # plt.show()
 
-senioridade_media_salario = df_limpo.groupby('senioridade')['usd'].mean().sort_values(ascending=False).reset_index()
+# senioridade_media_salario = df_limpo.groupby('senioridade')['usd'].mean().sort_values(ascending=False).reset_index()
 
-fig = px.bar(senioridade_media_salario,
-             x='senioridade',
-             y='usd',
-             title='média salarial por senioridade',
-             labels={'senioridade': 'nível de senioridade', 'usd': 'média salarial anual (usd)'})
+# fig = px.bar(senioridade_media_salario,
+#              x='senioridade',
+#              y='usd',
+#              title='média salarial por senioridade',
+#              labels={'senioridade': 'nível de senioridade', 'usd': 'média salarial anual (usd)'})
 
 # remoto_contagem = df_limpo['remoto'].value_counts().reset_index()
 # remoto_contagem.columns = ['tipo_trabalho', 'quantidade']
@@ -150,4 +150,4 @@ fig = px.bar(senioridade_media_salario,
 #     hole=0.5
 # 	)
 
-fig.show()
+# fig.show()
